@@ -58,3 +58,90 @@ If you are interested in collaborating, feel free to open an issue with suggesti
 - Benchmarks you would like to see wired in first.
 - Model providers you care about.
 - Logging / schema constraints you need for your own analysis.
+
+## Quickstart (minimal working slice)
+
+A first **runnable** vertical slice is implemented: a `toy_qa` in-repo benchmark
+and a trivial `echo` model adapter, wired through the CLI with unified
+JSON / JSONL / CSV logging.
+
+> ⚠️ This slice exists to prove the pipeline runs end to end. The `echo` model
+> only echoes the question back, so it answers nothing correctly — its accuracy
+> on `toy_qa` is honestly **0.0**. There are **no real benchmark numbers** here
+> yet; real benchmarks and model adapters are TODO.
+
+### Install
+
+```bash
+pip install -e .          # installs the `vlm-eval` CLI
+# optional: dev/test extras
+pip install -e ".[dev]"
+```
+
+Requires Python 3.10+. Runtime deps are intentionally small: `typer`,
+`pydantic`, `pyyaml` (plus `pytest` for tests).
+
+### Run the toy benchmark
+
+```bash
+vlm-eval run --benchmark toy_qa --model echo --config configs/toy_qa_echo.yml
+```
+
+CLI flags (`--benchmark`, `--model`, `--output-dir`, `--limit`) override the
+YAML config. Helpers:
+
+```bash
+vlm-eval list        # show registered benchmarks and models
+vlm-eval --version
+```
+
+You can also drive it from Python instead of the CLI:
+
+```bash
+python scripts/run_toy_qa.py
+```
+
+### Output files
+
+Each run writes to `<output_dir>/<run_name>/` (default `runs/toy_qa_echo/`):
+
+| File            | Contents                                                                 |
+|-----------------|--------------------------------------------------------------------------|
+| `records.jsonl` | One record per example: `{id, question, expected_answer, model_answer, correct}` |
+| `records.csv`   | The same per-example records as CSV                                      |
+| `summary.json`  | Aggregated metrics `{num_examples, num_correct, accuracy}` + run metadata |
+
+All metrics are computed from actual model outputs — nothing is hard-coded.
+
+### Tests
+
+```bash
+pytest
+```
+
+The tests run the full toy pipeline and check the log files; they need no API
+keys and no network access.
+
+### What's real vs. TODO
+
+- ✅ CLI (`vlm-eval run` / `list`), YAML config, model-adapter interface,
+  toy benchmark, exact-match metric, JSON/JSONL/CSV logging, tests.
+- ⏳ **TODO:** real benchmarks, hosted-API and local-model adapters, richer
+  metrics, and true image inputs (the toy data already carries an `image`
+  placeholder field so image paths can be plugged in later).
+
+### Package layout (as implemented)
+
+```text
+vlm_eval_harness/
+  cli.py             # Typer CLI: `vlm-eval`
+  config.py          # Pydantic RunConfig + YAML loader
+  core.py            # shared run_evaluation() orchestrator
+  models/            # base adapter + echo adapter + registry
+  benchmarks/        # toy_qa benchmark + registry
+  evaluation/        # exact-match metric + aggregation
+  logging/           # JSON / JSONL / CSV logger
+scripts/run_toy_qa.py
+configs/toy_qa_echo.yml
+tests/
+```
