@@ -6,6 +6,8 @@
 
 CLI-first Python harness for evaluating **vision-language models (VLMs)** and **multimodal LLMs** across multiple benchmarks with unified logging and reports.
 
+**Run many VLM benchmarks with one command, with typed configs and reproducible JSON/CSV logs.**
+
 > Status: ✨ Planning / scaffolding — API and benchmark list may evolve.
 
 ## Why you might care
@@ -13,6 +15,34 @@ CLI-first Python harness for evaluating **vision-language models (VLMs)** and **
 - You want a **single CLI** to run many VLM benchmarks without copy‑pasting ad‑hoc scripts.
 - You care about **reproducible JSON/CSV logs** instead of screenshots of leaderboards.
 - You want a **typed benchmark protocol** so new tasks and model adapters plug in cleanly.
+
+## 10-second example
+
+Run the working slice — the in-repo `toy_qa` benchmark against the trivial
+`echo` model — straight from the CLI:
+
+```bash
+# 10-second example: run the toy QA benchmark with the echo model
+vlm-eval run \
+  --benchmark toy_qa \
+  --model echo \
+  --config configs/toy_qa_echo.yml
+```
+
+This writes `records.jsonl`, `records.csv`, and `summary.json` under
+`runs/toy_qa_echo/`. The `echo` model only echoes the question, so its accuracy
+is honestly **0.0** — the example proves the pipeline runs end to end, not model
+quality. See [Quickstart](#quickstart-minimal-working-slice) for details.
+
+## Architecture
+
+The CLI parses flags into a config, which selects a benchmark and a model
+adapter; the benchmark yields examples, the model adapter answers them, the
+evaluation step scores the answers, and everything is written to JSON/CSV logs.
+
+![vlm-eval architecture: CLI → Config → Benchmark → Model Adapter → Evaluation → Logging (JSON/JSONL/CSV)](docs/architecture.png)
+
+Regenerate the diagram with `python scripts/generate_architecture_diagram.py`.
 
 ## Goals
 
