@@ -1,0 +1,13 @@
+# Minimal config: run the in-repo toy_qa benchmark with the trivial echo model.
+#
+# The echo model only echoes the question, so its accuracy on toy_qa is
+# expected to be 0.0. That is the honest result for a model that never
+# actually answers -- it demonstrates the pipeline, not model quality.
+#
+# No API keys or provider secrets belong in this file.
+
+benchmark: toy_qa
+model: echo
+output_dir: runs
+run_name: toy_qa_echo
+# limit: 3   # uncomment to evaluate only the first N examples (smoke test)
