@@ -96,9 +96,9 @@ def run(
         limit=limit,
     )
 
+    run_dir = Path(cfg.output_dir) / cfg.effective_run_name
     typer.echo(
-        f"Running benchmark={cfg.benchmark!r} model={cfg.model!r} "
-        f"-> {cfg.output_dir}/{cfg.effective_run_name}"
+        f"Running benchmark={cfg.benchmark!r} model={cfg.model!r} -> {run_dir}"
     )
     try:
         summary = run_evaluation(cfg)

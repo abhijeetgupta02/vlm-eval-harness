@@ -2,9 +2,27 @@
 
 from __future__ import annotations
 
-from typing import Callable, Protocol, runtime_checkable
+from typing import Any, Callable, Protocol, runtime_checkable
 
-from .toy_qa import Example, ToyQABenchmark
+from .toy_qa import ToyQABenchmark
+
+
+@runtime_checkable
+class Example(Protocol):
+    """Structural contract for one benchmark item.
+
+    This is the per-example interface that :func:`core.run_evaluation`
+    depends on, kept independent of any single benchmark implementation.
+    Concrete examples (e.g. ``toy_qa.Example``) satisfy it structurally.
+    """
+
+    id: str
+    question: str
+    expected_answer: str
+    image: str | None
+
+    def to_model_input(self) -> dict[str, Any]:
+        ...
 
 
 @runtime_checkable
