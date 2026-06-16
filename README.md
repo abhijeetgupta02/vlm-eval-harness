@@ -1,8 +1,18 @@
 # VLM Eval Harness
 
+[![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Status](https://img.shields.io/badge/status-experimental-orange)](https://github.com/abhijeetgupta02/vlm-eval-harness)
+[![Maintainer](https://img.shields.io/badge/maintainer-Abhijeet%20Gupta-0e75b6)](https://github.com/abhijeetgupta02)
+
 CLI-first Python harness for evaluating **vision-language models (VLMs)** and **multimodal LLMs** across multiple benchmarks with unified logging and reports.
 
 > Status: ✨ Planning / scaffolding — API and benchmark list may evolve.
+
+## Why you might care
+
+- You want a **single CLI** to run many VLM benchmarks without copy‑pasting ad‑hoc scripts.
+- You care about **reproducible JSON/CSV logs** instead of screenshots of leaderboards.
+- You want a **typed benchmark protocol** so new tasks and model adapters plug in cleanly.
 
 ## Goals
 
