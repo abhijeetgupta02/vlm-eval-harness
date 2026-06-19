@@ -1,6 +1,7 @@
 # VLM Eval Harness
 
 [![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![PyPI](https://img.shields.io/pypi/v/vlm-eval-harness?color=3775A9&logo=pypi&logoColor=white)](https://pypi.org/project/vlm-eval-harness/)
 [![Status](https://img.shields.io/badge/status-experimental-orange)](https://github.com/abhijeetgupta02/vlm-eval-harness)
 [![Maintainer](https://img.shields.io/badge/maintainer-Abhijeet%20Gupta-0e75b6)](https://github.com/abhijeetgupta02)
 

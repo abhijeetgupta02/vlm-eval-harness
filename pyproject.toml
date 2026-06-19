@@ -11,6 +11,13 @@ requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "Abhijeet Gupta" }]
 keywords = ["vlm", "evaluation", "benchmark", "multimodal", "llm"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
 dependencies = [
     "typer>=0.12",
     "pydantic>=2.0",
@@ -25,6 +32,8 @@ vlm-eval = "vlm_eval_harness.cli:app"
 
 [project.urls]
 Homepage = "https://github.com/abhijeetgupta02/vlm-eval-harness"
+Repository = "https://github.com/abhijeetgupta02/vlm-eval-harness"
+Issues = "https://github.com/abhijeetgupta02/vlm-eval-harness/issues"
 
 [tool.setuptools.packages.find]
 include = ["vlm_eval_harness*"]
