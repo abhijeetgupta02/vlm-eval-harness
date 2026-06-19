@@ -41,7 +41,7 @@ The CLI parses flags into a config, which selects a benchmark and a model
 adapter; the benchmark yields examples, the model adapter answers them, the
 evaluation step scores the answers, and everything is written to JSON/CSV logs.
 
-![vlm-eval architecture: CLI → Config → Benchmark → Model Adapter → Evaluation → Logging (JSON/JSONL/CSV)](docs/architecture.png)
+![vlm-eval architecture: CLI → Config → Benchmark → Model Adapter → Evaluation → Logging (JSON/JSONL/CSV)](https://raw.githubusercontent.com/abhijeetgupta02/vlm-eval-harness/main/docs/architecture.png)
 
 Regenerate the diagram with `python scripts/generate_architecture_diagram.py`.
 
